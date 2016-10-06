@@ -5,12 +5,58 @@
     xmlns:local="using:App1"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    MinHeight="600"
+    MinWidth="1000">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Button x:ConnectionId='1' x:Name="button" Content="Button" HorizontalAlignment="Left" Height="71" Margin="815,125,0,0" VerticalAlignment="Top" Width="176"                     />
-        <TextBlock x:ConnectionId='2' x:Name="temp_message" HorizontalAlignment="Left" Height="116" Margin="468,125,0,0" TextWrapping="Wrap" Text="TextBlock" VerticalAlignment="Top" Width="347"                                                 />
-        <Grid x:ConnectionId='3' x:Name="grid1" HorizontalAlignment="Left" Height="443" Margin="268,217,0,0" VerticalAlignment="Top" Width="1212"/>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+          Margin="20,80,20,20">
+        <Grid.Resources>
+            <Style
+                TargetType="Border">
+                <Setter
+                    Property="BorderBrush"
+                    Value="LightGray"></Setter>
+                <Setter
+                    Property="BorderThickness"
+                    Value="1"></Setter>
+            </Style>
+        </Grid.Resources>
+        
+        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button x:ConnectionId='1' Name="button" Content="选择课表(.xls)"                      
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                 Grid.Row="0" Grid.Column="1"/>
+        <TextBlock x:ConnectionId='2' Name="temp_message" TextWrapping="Wrap" Text="TextBlock"                                                  
+                   HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Grid.Row="0" Grid.Column="0"/>
+        <Grid x:ConnectionId='3' Name="grid1"
+              Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.Resources>
+                <Style
+                TargetType="Border">
+                    <Setter
+                    Property="BorderBrush"
+                    Value="LightGray"></Setter>
+                    <Setter
+                    Property="BorderThickness"
+                    Value="1"></Setter>
+                </Style>
+            </Grid.Resources>
+        </Grid>
+
+        <Border></Border>
+        <Border
+            Grid.Column="1"></Border>
+
     </Grid>
 </Page>
 

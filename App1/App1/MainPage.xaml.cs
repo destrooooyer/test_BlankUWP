@@ -96,21 +96,32 @@ namespace App1
                         }
                     }
                 }
+                grid1.Children.Clear();
+                grid1.RowDefinitions.Clear();
+                grid1.ColumnDefinitions.Clear();
                 InitRows(6, grid1);
-                InitColumns(7, grid1);
+                InitColumns(5, grid1);
                 for (int i = 2; i < 8; i++)
                 {
-                    for (int j = 2; j < 9; j++)
+                    for (int j = 2; j < 7; j++)
                     {
 
                         TextBlock block = new TextBlock();
 
                         block.Text = System.Text.Encoding.Unicode.GetString(strs[str_id[i, j]]);
+                        block.Padding = new Thickness(10);
+                        block.TextWrapping = TextWrapping.Wrap;
 
                         grid1.Children.Add(block);
                         Grid.SetRow(block, i - 2);
                         Grid.SetColumn(block, j - 2);
                         //temp_message.Text = ""+ str_id[i,j] + " "+ System.Text.Encoding.Unicode.GetString(strs[str_id[i, j]]);
+
+                        Border bd = new Border();
+                        grid1.Children.Add(bd);
+                        Grid.SetRow(bd, i - 2);
+                        Grid.SetColumn(bd, j - 2);
+
                     }
                 }
 
@@ -134,7 +145,7 @@ namespace App1
             while (colCount-- > 0)
             {
                 ColumnDefinition rd = new ColumnDefinition();
-                rd.Width = new GridLength(100);
+                rd.Width = new GridLength(1,GridUnitType.Star);
                 g.ColumnDefinitions.Add(rd);
             }
         }
