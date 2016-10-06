@@ -5,41 +5,25 @@
     xmlns:local="using:App1"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    MinHeight="600"
-    MinWidth="1000">
+    mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-          Margin="20,80,20,20">
-        <Grid.Resources>
-            <Style
-                TargetType="Border">
-                <Setter
-                    Property="BorderBrush"
-                    Value="LightGray"></Setter>
-                <Setter
-                    Property="BorderThickness"
-                    Value="1"></Setter>
-            </Style>
-        </Grid.Resources>
-        
-        
+    <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="Auto"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Button x:ConnectionId='1' Name="button" Content="选择课表(.xls)"                      
-                HorizontalAlignment="Center" VerticalAlignment="Center"
-                 Grid.Row="0" Grid.Column="1"/>
-        <TextBlock x:ConnectionId='2' Name="temp_message" TextWrapping="Wrap" Text="TextBlock"                                                  
-                   HorizontalAlignment="Center" VerticalAlignment="Center"
-                   Grid.Row="0" Grid.Column="0"/>
-        <Grid x:ConnectionId='3' Name="grid1"
-              Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+
+        <Button x:ConnectionId='1'                        Style="{StaticResource SplitViewTogglePaneButtonStyle}"></Button>
+        <TextBlock Text="周课表"
+                   Style="{ThemeResource TitleTextBlockStyle}" 
+                   VerticalAlignment="Center"
+                   Grid.Column="1"/>
+
+        <Grid x:ConnectionId='2' Name="grid_week" Grid.Row="1" Grid.ColumnSpan="2">
             <Grid.Resources>
                 <Style
                 TargetType="Border">
@@ -51,12 +35,40 @@
                     Value="1"></Setter>
                 </Style>
             </Grid.Resources>
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button x:ConnectionId='4' Name="button" Content="选择课表(.xls)"                      
+                    HorizontalAlignment="Center" VerticalAlignment="Center"
+                    Grid.Row="0" Grid.Column="1"/>
+            <TextBlock x:ConnectionId='5' Name="temp_message" TextWrapping="Wrap" Text="TextBlock"                                                  
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Grid.Row="0" Grid.Column="0"/>
+            <Grid x:ConnectionId='6' Name="grid1"
+              Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
+                <Grid.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="BorderBrush"
+                                Value="LightGray"></Setter>
+                        <Setter Property="BorderThickness"
+                                Value="1"></Setter>
+                    </Style>
+                </Grid.Resources>
+            </Grid>
+
+
         </Grid>
-
-        <Border></Border>
-        <Border
-            Grid.Column="1"></Border>
-
+        <local:pane x:ConnectionId='3' x:Name="pane" 
+                    Grid.ColumnSpan="2"
+                    Grid.RowSpan="2"></local:pane>
     </Grid>
+
 </Page>
 

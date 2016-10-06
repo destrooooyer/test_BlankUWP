@@ -27,6 +27,7 @@ namespace App1
         public MainPage()
         {
             this.InitializeComponent();
+            pane.pane_lv.SelectedIndex = 1;
         }
 
         private async void button_Click(object sender, RoutedEventArgs e)
@@ -153,6 +154,11 @@ namespace App1
         private void temp_message_SelectionChanged(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            pane.splitview.IsPaneOpen = !pane.splitview.IsPaneOpen;
         }
     }
 }
