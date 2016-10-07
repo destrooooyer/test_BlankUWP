@@ -7,8 +7,8 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <SplitView DisplayMode="Overlay"
-               x:Name="splitview"
+    <SplitView x:Name="splitview"
+               DisplayMode="Overlay"
                x:FieldModifier="Public">
         <SplitView.Pane>
             <ListView Name="pane_lv"

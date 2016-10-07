@@ -22,13 +22,13 @@
     <AppXManifest Include="C:\Users\DESTR\Documents\GitHub\test_BlankUWP\App1\App1\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2016-10-06T15:34:45.105</Modified>
+      <Modified>2016-10-07T03:29:47.519</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="C:\Users\DESTR\Documents\GitHub\test_BlankUWP\App1\App1\bin\x86\Debug\App1.exe">
       <PackagePath>entrypoint\App1.exe</PackagePath>
-      <Modified>2016-10-06T15:34:44.733</Modified>
+      <Modified>2016-10-07T03:29:46.959</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\DESTR\.nuget\packages\Microsoft.ApplicationInsights\1.0.0\lib\portable-win81+wpa81\Microsoft.ApplicationInsights.dll">
       <PackagePath>Microsoft.ApplicationInsights.dll</PackagePath>
@@ -498,7 +498,7 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\DESTR\Documents\GitHub\test_BlankUWP\App1\App1\bin\x86\Debug\App1.xr.xml">
       <PackagePath>App1.xr.xml</PackagePath>
-      <Modified>2016-10-06T15:30:49.883</Modified>
+      <Modified>2016-10-07T03:29:46.827</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -506,11 +506,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\DESTR\Documents\GitHub\test_BlankUWP\App1\App1\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2016-10-06T15:32:29.093</Modified>
+      <Modified>2016-10-07T03:29:47.390</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\DESTR\Documents\GitHub\test_BlankUWP\App1\App1\bin\x86\Debug\Core\App1.exe">
       <PackagePath>App1.exe</PackagePath>
-      <Modified>2016-10-06T15:34:45.103</Modified>
+      <Modified>2016-10-07T03:29:47.518</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

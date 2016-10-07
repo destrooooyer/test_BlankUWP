@@ -24,8 +24,28 @@
                    Grid.Column="1"/>
 
 
+        <ListView
+            Name="sp"
+            Grid.Row="1" Grid.ColumnSpan="2">
+            <Border BorderBrush="WhiteSmoke" BorderThickness="1">
+                <Button Height="100" Width="{Binding Path=ActualWidth,ElementName=sp}"
+                    Click="Button_Click"
+                    Name="chooseXls">
+                    未选择课表，请选择课表
+                </Button>
+            </Border>
+
+            <Border BorderBrush="WhiteSmoke" BorderThickness="1">
+                <Button Height="100" Width="{Binding Path=ActualWidth,ElementName=sp}">
+                        膜法师的修养
+                </Button>
+            </Border>
+        </ListView>
+
+
         <local:pane x:Name="pane" 
                     Grid.ColumnSpan="2"
                     Grid.RowSpan="2"></local:pane>
+
     </Grid>
 </Page>

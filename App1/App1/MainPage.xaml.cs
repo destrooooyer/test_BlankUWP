@@ -24,79 +24,39 @@ namespace App1
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        StorageFile file;
+        private String filename=" ";
+
         public MainPage()
         {
             this.InitializeComponent();
             pane.pane_lv.SelectedIndex = 1;
+            initGrid();
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            initGrid();
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
         }
 
         private async void button_Click(object sender, RoutedEventArgs e)
         {
-            FileOpenPicker openFile = new FileOpenPicker();
-            openFile.SuggestedStartLocation = PickerLocationId.Downloads;
-            openFile.ViewMode = PickerViewMode.List;
-            openFile.FileTypeFilter.Add(".xls");
+            await global.openfile();
+            initGrid();
+        }
 
-            StorageFile file = await openFile.PickSingleFileAsync();
-            if (file != null)
+        private void initGrid()
+        {
+            if (global.File != null)
             {
-                temp_message.Text = "你所选择的文件是： " + file.Name;
+                temp_message.Text ="已打开 "+ global.File.Name;
 
-                byte b1, b2 = 0;
-                int num_of_str = 0;
-                byte[][] strs = new byte[100][];
-                int[,] str_id = new int[100, 100];
-                using (Stream file1 = await file.OpenStreamForReadAsync())
-                {
-                    using (BinaryReader read = new BinaryReader(file1))
-                    {
-                        //read.Read(data, 0, 10000);
-                        try
-                        {
-                            while (true)
-                            {
-                                b1 = read.ReadByte();
-
-                                if (b1 == 0 && b2 == 0xfc)
-                                {
-                                    //read strs
-                                    read.ReadInt16();
-                                    read.ReadInt32();
-                                    num_of_str = read.ReadInt32();
-
-                                    for (int i = 0; i < num_of_str; i++)
-                                    {
-                                        int length = read.ReadInt16();
-                                        int long_char = read.ReadByte();
-                                        length = length << long_char;
-                                        strs[i] = read.ReadBytes(length);
-                                    }
-
-                                    b2 = 0;
-                                    continue;
-                                }
-                                if (b1 == 0 && b2 == 0xfd)
-                                {
-                                    b2 = 0;
-                                    read.ReadInt16();
-                                    int row = read.ReadInt16();
-                                    int col = read.ReadInt16();
-                                    int s = read.ReadInt16();
-
-                                    int id = read.ReadInt32();
-                                    str_id[row, col] = id;
-
-                                    continue;
-                                }
-                                b2 = b1;
-                            }
-                        }
-                        catch (Exception exce)
-                        {
-
-                        }
-                    }
-                }
                 grid1.Children.Clear();
                 grid1.RowDefinitions.Clear();
                 grid1.ColumnDefinitions.Clear();
@@ -109,7 +69,7 @@ namespace App1
 
                         TextBlock block = new TextBlock();
 
-                        block.Text = System.Text.Encoding.Unicode.GetString(strs[str_id[i, j]]);
+                        block.Text = global.Strs(global.Str_id[i, j]);
                         block.Padding = new Thickness(10);
                         block.TextWrapping = TextWrapping.Wrap;
 
@@ -129,9 +89,10 @@ namespace App1
             }
             else
             {
-                temp_message.Text = "打开文件操作被取消。";
+                temp_message.Text = "没有打开文件，滚去设置";
             }
         }
+
         private void InitRows(int rowCount, Grid g)
         {
             while (rowCount-- > 0)
@@ -146,7 +107,7 @@ namespace App1
             while (colCount-- > 0)
             {
                 ColumnDefinition rd = new ColumnDefinition();
-                rd.Width = new GridLength(1,GridUnitType.Star);
+                rd.Width = new GridLength(1, GridUnitType.Star);
                 g.ColumnDefinitions.Add(rd);
             }
         }

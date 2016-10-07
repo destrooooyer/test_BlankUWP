@@ -36,32 +36,29 @@
                 </Style>
             </Grid.Resources>
 
-
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Name="button" Content="选择课表(.xls)"  Click="button_Click"
-                    HorizontalAlignment="Center" VerticalAlignment="Center"
-                    Grid.Row="0" Grid.Column="1"/>
-            <TextBlock Name="temp_message" TextWrapping="Wrap" Text="TextBlock" SelectionChanged="temp_message_SelectionChanged" 
+            <TextBlock Name="temp_message" TextWrapping="Wrap" Text="没有打开文件，滚去设置" SelectionChanged="temp_message_SelectionChanged" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"
                        Grid.Row="0" Grid.Column="0"/>
-            <Grid Name="grid1"
-              Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2">
-                <Grid.Resources>
-                    <Style TargetType="Border">
-                        <Setter Property="BorderBrush"
+            
+            <ScrollViewer Grid.Row="1" Grid.Column="0"
+                          Padding="0,20,0,0">
+                <Grid Name="grid1">
+                    <Grid.Resources>
+                        <Style TargetType="Border">
+                            <Setter Property="BorderBrush"
                                 Value="LightGray"></Setter>
-                        <Setter Property="BorderThickness"
+                            <Setter Property="BorderThickness"
                                 Value="1"></Setter>
-                    </Style>
-                </Grid.Resources>
-            </Grid>
+                        </Style>
+                    </Grid.Resources>
+                </Grid>
+            </ScrollViewer>
+            
+            
 
 
         </Grid>

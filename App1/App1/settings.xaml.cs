@@ -31,5 +31,23 @@ namespace App1
         {
             pane.splitview.IsPaneOpen = !pane.splitview.IsPaneOpen;
         }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (global.File == null)
+                chooseXls.Content = "未选择课表，请选择课表";
+            else
+                chooseXls.Content = "已打开 " + global.File.Name;
+        }
+
+        private async void Button_Click(object sender, RoutedEventArgs e)
+        {
+            await global.openfile();
+            if (global.File == null)
+                chooseXls.Content = "未选择课表，请选择课表";
+            else
+                chooseXls.Content = "已打开 " + global.File.Name;
+        }
     }
 }
