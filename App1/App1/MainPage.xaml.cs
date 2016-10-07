@@ -50,6 +50,7 @@ namespace App1
 
         private void initGrid()
         {
+
             if (global.state==1)
             {
                 temp_message.Text = "已打开 " + global.File.Name;
@@ -57,11 +58,38 @@ namespace App1
                 grid1.Children.Clear();
                 grid1.RowDefinitions.Clear();
                 grid1.ColumnDefinitions.Clear();
+                int days = 5;
+                for (int index = 5; index < 7; index++)
+                {
+                    for (int jndex = 0; jndex < 6; jndex++)
+                    {
+                        if (global.res[jndex, index].Length > 0)
+                        {
+                            days = index+1;
+                        }
+                    }
+                }
                 InitRows(6, grid1);
-                InitColumns(5, grid1);
+                InitColumns(days, grid1);
+                String[] days_in_week = new String[] {"Mon","Tue","Wed","Thur","Fri","Sat","Sun"};
+                for (int j = 0; j < days; j++)
+                {
+                    TextBlock block = new TextBlock();
+                    block.Text = days_in_week[j];
+                    block.Padding = new Thickness(10);
+                    block.TextWrapping = TextWrapping.Wrap;
+
+                    grid1.Children.Add(block);
+                    Grid.SetRow(block, 0);
+                    Grid.SetColumn(block, j);
+                    Border bd = new Border();
+                    grid1.Children.Add(bd);
+                    Grid.SetRow(bd, 0);
+                    Grid.SetColumn(bd, j);
+                }
                 for (int i = 0; i < 6; i++)
                 {
-                    for (int j = 0; j < 5; j++)
+                    for (int j = 0; j < days; j++)
                     {
                         TextBlock block = new TextBlock();
 
@@ -70,13 +98,13 @@ namespace App1
                         block.TextWrapping = TextWrapping.Wrap;
 
                         grid1.Children.Add(block);
-                        Grid.SetRow(block, i);
+                        Grid.SetRow(block, i+1);
                         Grid.SetColumn(block, j);
                         //temp_message.Text = ""+ str_id[i,j] + " "+ System.Text.Encoding.Unicode.GetString(strs[str_id[i, j]]);
 
                         Border bd = new Border();
                         grid1.Children.Add(bd);
-                        Grid.SetRow(bd, i);
+                        Grid.SetRow(bd, i+1);
                         Grid.SetColumn(bd, j);
 
                     }
