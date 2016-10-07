@@ -52,26 +52,24 @@ namespace App1
                 grid1.RowDefinitions.Clear();
                 grid1.ColumnDefinitions.Clear();
                 InitRows(6, grid1);
-                for (int i = 2; i < 8; i++)
+                for (int i = 0; i < 6; i++)
                 {
-                    int j = Convert.ToInt32(DateTime.Now.DayOfWeek) + 1;
-
+                    int j = Convert.ToInt32(DateTime.Now.DayOfWeek)-1;
+                    if (j < 0) j = 6;
                     TextBlock block = new TextBlock();
 
-                    block.Text = global.Strs(global.Str_id[i, j]);
+                    block.Text = global.res[i,j];
                     block.Padding = new Thickness(10);
                     block.TextWrapping = TextWrapping.Wrap;
                     block.MinHeight = 100;
 
                     grid1.Children.Add(block);
-                    Grid.SetRow(block, i - 2);
+                    Grid.SetRow(block, i);
                     //temp_message.Text = ""+ str_id[i,j] + " "+ System.Text.Encoding.Unicode.GetString(strs[str_id[i, j]]);
 
                     Border bd = new Border();
                     grid1.Children.Add(bd);
-                    Grid.SetRow(bd, i - 2);
-
-
+                    Grid.SetRow(bd, i);
                 }
 
             }

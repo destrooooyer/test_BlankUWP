@@ -62,30 +62,28 @@ namespace App1
                 grid1.ColumnDefinitions.Clear();
                 InitRows(6, grid1);
                 InitColumns(5, grid1);
-                for (int i = 2; i < 8; i++)
+                for (int i = 0; i < 6; i++)
                 {
-                    for (int j = 2; j < 7; j++)
+                    for (int j = 0; j < 5; j++)
                     {
-
                         TextBlock block = new TextBlock();
 
-                        block.Text = global.Strs(global.Str_id[i, j]);
+                        block.Text = global.res[i,j];
                         block.Padding = new Thickness(10);
                         block.TextWrapping = TextWrapping.Wrap;
 
                         grid1.Children.Add(block);
-                        Grid.SetRow(block, i - 2);
-                        Grid.SetColumn(block, j - 2);
+                        Grid.SetRow(block, i);
+                        Grid.SetColumn(block, j);
                         //temp_message.Text = ""+ str_id[i,j] + " "+ System.Text.Encoding.Unicode.GetString(strs[str_id[i, j]]);
 
                         Border bd = new Border();
                         grid1.Children.Add(bd);
-                        Grid.SetRow(bd, i - 2);
-                        Grid.SetColumn(bd, j - 2);
+                        Grid.SetRow(bd, i);
+                        Grid.SetColumn(bd, j);
 
                     }
                 }
-
             }
             else
             {
