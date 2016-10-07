@@ -25,6 +25,7 @@ namespace App1
         public today()
         {
             this.InitializeComponent();
+            pane.pane_lv.SelectedIndex = 0;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

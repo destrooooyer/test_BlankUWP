@@ -34,6 +34,7 @@ namespace App1
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+            pane.pane_lv.SelectedIndex = 1;
             initGrid();
         }
 
