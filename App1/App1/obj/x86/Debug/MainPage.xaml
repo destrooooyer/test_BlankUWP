@@ -17,13 +17,13 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Click="Button_Click_1" Style="{StaticResource SplitViewTogglePaneButtonStyle}"></Button>
+        <Button x:ConnectionId='1'                        Style="{StaticResource SplitViewTogglePaneButtonStyle}"></Button>
         <TextBlock Text="周课表"
                    Style="{ThemeResource TitleTextBlockStyle}" 
                    VerticalAlignment="Center"
                    Grid.Column="1"/>
 
-        <Grid Name="grid_week" Grid.Row="1" Grid.ColumnSpan="2">
+        <Grid x:ConnectionId='2' Name="grid_week" Grid.Row="1" Grid.ColumnSpan="2">
             <Grid.Resources>
                 <Style TargetType="Border">
                     <Setter
@@ -39,13 +39,13 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Name="temp_message" TextWrapping="Wrap" Text="没有打开文件，滚去设置" SelectionChanged="temp_message_SelectionChanged" 
+            <TextBlock x:ConnectionId='4' Name="temp_message" TextWrapping="Wrap" Text="没有打开文件，滚去设置"                                                  
                        HorizontalAlignment="Center" VerticalAlignment="Center"
                        Grid.Row="0" Grid.Column="0"/>
             
             <ScrollViewer Grid.Row="1" Grid.Column="0"
                           Padding="0,20,0,0">
-                <Grid Name="grid1">
+                <Grid x:ConnectionId='5' Name="grid1">
                     <Grid.Resources>
                         <Style TargetType="Border">
                             <Setter Property="BorderBrush"
@@ -61,9 +61,10 @@
 
 
         </Grid>
-        <local:pane x:Name="pane" 
+        <local:pane x:ConnectionId='3' x:Name="pane" 
                     Grid.ColumnSpan="2"
                     Grid.RowSpan="2"></local:pane>
     </Grid>
 
 </Page>
+
