@@ -24,14 +24,11 @@ namespace App1
     /// </summary>
     public sealed partial class MainPage : Page
     {
-        StorageFile file;
-        private String filename=" ";
-
         public MainPage()
         {
             this.InitializeComponent();
             pane.pane_lv.SelectedIndex = 1;
-            initGrid();
+            readSaved();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -53,9 +50,9 @@ namespace App1
 
         private void initGrid()
         {
-            if (global.File != null)
+            if (global.state==1)
             {
-                temp_message.Text ="已打开 "+ global.File.Name;
+                temp_message.Text = "已打开 " + global.File.Name;
 
                 grid1.Children.Clear();
                 grid1.RowDefinitions.Clear();
@@ -68,7 +65,7 @@ namespace App1
                     {
                         TextBlock block = new TextBlock();
 
-                        block.Text = global.res[i,j];
+                        block.Text = global.res[i, j];
                         block.Padding = new Thickness(10);
                         block.TextWrapping = TextWrapping.Wrap;
 
@@ -89,6 +86,22 @@ namespace App1
             {
                 temp_message.Text = "没有打开文件，滚去设置";
             }
+        }
+
+        private async void readSaved()
+        {
+            if (global.File == null)
+            {
+                StorageFolder folder = ApplicationData.Current.LocalFolder;
+                StorageFile saved = await folder.TryGetItemAsync("saved.xls") as StorageFile;
+                if (saved != null)
+                {
+                    global.File = saved;
+                    await global.readXls();
+                    global.state = 1;
+                }
+            }
+            initGrid();
         }
 
         private void InitRows(int rowCount, Grid g)

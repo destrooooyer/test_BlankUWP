@@ -15,14 +15,19 @@ namespace App1
     {
         static StorageFile file;
         public static string[,] res = new string[6, 7];
-
+        //public static StringMap setting;
         public static StorageFile File
         {
             get
             {
                 return file;
             }
+            set
+            {
+                file = value;
+            }
         }
+        public static int state=0;
 
         public static async Task<int> openfile()
         {
@@ -34,12 +39,16 @@ namespace App1
             file = await openFile.PickSingleFileAsync();
             if (file != null)
             {
-                readXls(file);
+                StorageFolder folder = ApplicationData.Current.LocalFolder;
+                StorageFile a = await folder.TryGetItemAsync("saved.xls") as StorageFile;
+                if(a==null) a=await folder.CreateFileAsync("saved.xls");
+                await file.CopyAndReplaceAsync(a);
+                readXls();
             }
             return 0;
         }
 
-        public static async void readXls(StorageFile file)
+        public static async Task<int> readXls()
         {
             byte b1, b2 = 0;
             int num_of_str = 0;
@@ -105,6 +114,7 @@ namespace App1
                     res[i, j] = s == null ? "" : s;
                 }
             }
+            return 0;
         }
 
     }
