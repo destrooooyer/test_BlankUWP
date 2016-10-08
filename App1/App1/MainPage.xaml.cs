@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
@@ -28,7 +29,7 @@ namespace App1
         {
             this.InitializeComponent();
             pane.pane_lv.SelectedIndex = 1;
-            readSaved();
+            initGrid();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -52,7 +53,7 @@ namespace App1
         private void initGrid()
         {
 
-            if (global.state==1)
+            if (global.File!=null)
             {
                 temp_message.Text = "已打开 " + global.File.Name;
 
@@ -115,21 +116,7 @@ namespace App1
             {
                 temp_message.Text = "没有打开文件，滚去设置";
             }
-        }
-
-        private async void readSaved()
-        {
-            if (global.File == null)
-            {
-                StorageFolder folder = ApplicationData.Current.LocalFolder;
-                StorageFile saved = await folder.TryGetItemAsync("saved.xls") as StorageFile;
-                if (saved != null)
-                {
-                    global.File = saved;
-                    await global.readXls();
-                }
-            }
-            initGrid();
+            temp_message.Text = global.getSetting("first_monday");
         }
 
         private void InitRows(int rowCount, Grid g)

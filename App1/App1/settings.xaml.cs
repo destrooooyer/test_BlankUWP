@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Xml;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -49,10 +50,21 @@ namespace App1
                 chooseXls.Content = "文件被占用或无权访问";
             else if(open_s == -2)
                 chooseXls.Content = "文件读取过程出错";
+            else if (open_s == -3)
+                chooseXls.Content = "未选择课表，请选择课表";
             else if (global.File == null)
                 chooseXls.Content = "未选择课表，请选择课表";
             else
                 chooseXls.Content = "已打开 " + global.File.Name;
         }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            DateTimeOffset? d =date.Date;
+            long first_monday = d.HasValue?d.Value.ToUnixTimeSeconds():0;
+            global.setSetting("first_monday", first_monday.ToString());
+            global.saveSetting();
+        }
+        
     }
 }

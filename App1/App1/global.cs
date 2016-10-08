@@ -9,7 +9,7 @@ using Windows.Foundation.Collections;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using System.Text.RegularExpressions;
-
+using System.Xml;
 
 namespace App1
 {
@@ -30,6 +30,7 @@ namespace App1
             }
         }
         public static int state = 0;
+        public static XmlDocument doc;
 
         public static async Task<int> openfile()
         {
@@ -48,7 +49,7 @@ namespace App1
                 int r=await readXls();
                 return r;
             }
-            return -1;
+            return -3;
         }
 
         public static async Task<int> readXls()
@@ -171,5 +172,84 @@ namespace App1
             return 0;
         }
 
+        public static string getSetting(string name)
+        {
+            XmlNode root = doc.ChildNodes[0];
+            foreach(XmlNode n in root.ChildNodes)
+            {
+                if (n.Name == name)
+                {
+                    return n.InnerText;
+                }
+            }
+            return "";
+        }
+
+        public static void setSetting(string name,string value)
+        {
+            XmlNode root = doc.ChildNodes[0];
+            foreach (XmlNode n in root.ChildNodes)
+            {
+                if (n.Name == name)
+                {
+                    n.InnerText = value;
+                    return;
+                }
+            }
+            XmlNode newNode = doc.CreateElement(name);
+            newNode.InnerText = value;
+            doc.ChildNodes[0].AppendChild(newNode);
+        }
+
+        public static async Task<int> saveSetting()
+        {
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFile setting_file = await folder.TryGetItemAsync("setting.xml") as StorageFile;
+            if (setting_file == null)
+            {
+                setting_file = await folder.CreateFileAsync("setting.xml");
+            }
+            using (Stream f = await setting_file.OpenStreamForWriteAsync())
+                doc.Save(f);
+            return 0;
+        }
+
+        public static async Task<int> readSetting()
+        {
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFile setting_file = await folder.TryGetItemAsync("setting.xml") as StorageFile;
+            if (setting_file != null)
+            {
+                doc = new XmlDocument();
+                using(Stream f= await setting_file.OpenStreamForReadAsync())
+                    doc.Load(f);
+                //temp_message.Text = doc.ChildNodes[0].ChildNodes[0].InnerText;
+            }
+            else
+            {
+                setting_file = await folder.CreateFileAsync("setting.xml");
+                doc = new XmlDocument();
+                doc.CreateXmlDeclaration("1.0", "utf-8", "yes");
+                XmlNode rootNode = doc.CreateElement("Settings");
+                doc.AppendChild(rootNode);
+                using(Stream f= await setting_file.OpenStreamForWriteAsync())
+                    doc.Save(f);
+            }
+            return 0;
+        }
+
+        public static async Task<int> readSaved()
+        {
+            StorageFolder folder = ApplicationData.Current.LocalFolder;
+            StorageFile saved = await folder.TryGetItemAsync("saved.xls") as StorageFile;
+            if (saved != null)
+            {
+                file = saved;
+                return await readXls();
+            }else
+            {
+                return -3;
+            }
+        }
     }
 }

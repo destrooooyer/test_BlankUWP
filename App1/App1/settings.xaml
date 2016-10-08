@@ -35,9 +35,10 @@
                 </Button>
             </Border>
 
+            <CalendarDatePicker x:Name="date" Height="37"  Width="{Binding Path=ActualWidth,ElementName=sp}"/>
             <Border BorderBrush="WhiteSmoke" BorderThickness="1">
-                <Button Height="100" Width="{Binding Path=ActualWidth,ElementName=sp}">
-                        膜法师的修养
+                <Button Height="100" Width="{Binding Path=ActualWidth,ElementName=sp}" Click="Button_Click_2">
+                        提交
                 </Button>
             </Border>
         </ListView>
@@ -45,7 +46,7 @@
 
         <local:pane x:Name="pane" 
                     Grid.ColumnSpan="2"
-                    Grid.RowSpan="2"></local:pane>
+                    Grid.RowSpan="2" d:IsHidden="True"></local:pane>
 
     </Grid>
 </Page>
