@@ -44,8 +44,12 @@ namespace App1
 
         private async void Button_Click(object sender, RoutedEventArgs e)
         {
-            await global.openfile();
-            if (global.File == null)
+            int open_s = await global.openfile();
+            if (open_s==-1)
+                chooseXls.Content = "文件被占用或无权访问";
+            else if(open_s == -2)
+                chooseXls.Content = "文件读取过程出错";
+            else if (global.File == null)
                 chooseXls.Content = "未选择课表，请选择课表";
             else
                 chooseXls.Content = "已打开 " + global.File.Name;

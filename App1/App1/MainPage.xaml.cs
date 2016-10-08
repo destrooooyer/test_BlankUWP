@@ -70,7 +70,7 @@ namespace App1
                         }
                     }
                 }
-                InitRows(6, grid1);
+                InitRows(7, grid1);
                 InitColumns(days, grid1);
                 String[] days_in_week = new String[] {"Mon","Tue","Wed","Thur","Fri","Sat","Sun"};
                 for (int j = 0; j < days; j++)
@@ -127,7 +127,6 @@ namespace App1
                 {
                     global.File = saved;
                     await global.readXls();
-                    global.state = 1;
                 }
             }
             initGrid();
