@@ -17,6 +17,7 @@ namespace App1
     {
         static StorageFile file;
         public static string[,] res = new string[6, 7];
+
         //public static StringMap setting;
         public static StorageFile File
         {
@@ -29,8 +30,21 @@ namespace App1
                 file = value;
             }
         }
+
+        internal static subjectDisplay[,] Subjects
+        {
+            get
+            {
+                return subjects;
+            }
+            
+        }
+
         public static int state = 0;
         public static XmlDocument doc;
+
+        static subjectDisplay[,] subjects = new subjectDisplay[6, 7];
+
 
         public static async Task<int> openfile()
         {
@@ -58,6 +72,11 @@ namespace App1
             int num_of_str = 0;
             byte[][] strs = new byte[100][];
             int[,] str_id = new int[100, 100];
+
+            for (int i = 0; i < 6; i++)
+                for (int j = 0; j < 7; j++)
+                    Subjects[i, j] = new subjectDisplay();
+
             try
             {
                 using (var read = new BinaryReader(await file.OpenStreamForReadAsync()))
@@ -167,6 +186,22 @@ namespace App1
                                         teacher = teacher.Substring(1);
                                     }
                                     s2show += i + " " + j + name + week + teacher + time + location + "\n";
+
+                                    Regex pWeek = new Regex("(\\d*)-(\\d*)");
+                                    var mc = pWeek.Match(week);
+                                    int weekBegin = Convert.ToInt32(mc.Groups[1].Value);
+                                    int weekEnd = Convert.ToInt32(mc.Groups[2].Value);
+//                                     int weekBegin = 1;
+//                                     int weekEnd=1;
+                                    pWeek = new Regex(@"单");
+                                    int isDanShuangZhou = 0;
+                                    if (pWeek.IsMatch(week)) isDanShuangZhou = 1;
+                                    pWeek = new Regex(@"双");
+                                    if (pWeek.IsMatch(week)) isDanShuangZhou = 2;
+                                    Subjects[i, j].pushBack(name, teacher, location,weekBegin,weekEnd,isDanShuangZhou);
+
+
+
                                     week = week.Replace("周", "");
                                     List<int> week_int = new List<int>();
                                     foreach (string str in week.Split(','))

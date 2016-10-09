@@ -100,7 +100,35 @@ namespace App1
                     {
                         TextBlock block = new TextBlock();
 
-                        block.Text = global.res[i, j];
+
+                        try
+                        {
+                            int week = global.getWeekOfToday();
+                            for (int k = 0; k < global.Subjects[i, j].Name.Count; k++)
+                            {
+                                if(global.Subjects[i, j].WeekBegin[k]<=week&& global.Subjects[i, j].WeekEnd[k]>=week)
+                                {
+                                    if(global.Subjects[i, j].IsDanShuangZhou[k]==0||
+                                        global.Subjects[i, j].IsDanShuangZhou[k]==1&&week%2==1||
+                                        global.Subjects[i, j].IsDanShuangZhou[k]==2&&week%2==0)
+                                    {
+                                        block.Text += global.Subjects[i, j].Name[k];
+                                        block.Text += global.Subjects[i, j].Location[k];
+                                        block.Text += global.Subjects[i, j].Teacher[k];
+                                        block.Text += global.Subjects[i, j].WeekBegin[k];
+                                        block.Text += global.Subjects[i, j].WeekEnd[k];
+                                        block.Text += global.Subjects[i, j].IsDanShuangZhou[k];
+                                    }
+                                }
+                            }
+                        }
+                        catch (System.Exception ex)
+                        {
+                            block.Text = global.res[i, j];
+                        }
+
+
+                        //block.Text = global.res[i, j];
                         block.Padding = new Thickness(10);
                         block.TextWrapping = TextWrapping.Wrap;
 

@@ -109,6 +109,7 @@
     <Compile Include="settings.xaml.cs">
       <DependentUpon>settings.xaml</DependentUpon>
     </Compile>
+    <Compile Include="subjectDisplay.cs" />
     <Compile Include="today.xaml.cs">
       <DependentUpon>today.xaml</DependentUpon>
     </Compile>
