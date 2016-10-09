@@ -114,9 +114,15 @@ namespace App1
                 return -2;
             }
 
-            string course_patern = "</br>(?<course>[\\s\\S]+?)</br>";
-            string tail_patern = "(?<teacher>[\\u4E00-\\uFA29\\s,]*)\\[(?<week>[,\\-\\s\\d\\u4E00-\\uFA29]+)\\](</br>)?(?<location>[\\w\\s\\-()]+)?(?<time>\\u7B2C[\\d,]+\\u8282)(,(?<teacher>[\\u4E00-\\uFA29\\s]*)\\[(?<week>[,\\-\\s\\d\\u4E00-\\uFA29]+)\\]</br>(?<location>[\\w\\s\\-()]+)?(?<time>\\u7B2C[\\d,]+\\u8282))*";
-            string patern = course_patern + tail_patern;
+            String course_patern = "</br>(?<course>[\\s\\S]+?)</br>";
+            String teacher_patern = "(?<teacher>[\\u4E00-\\uFA29\\s,]*)";
+            String week_patern = "\\[(?<week>[,\\-\\s\\d\\u5468]+)\\]";
+            String teacher_week_patern = teacher_patern + week_patern + "(," + teacher_patern + week_patern + ")*";
+            String location_patern = "(</br>)?(?<location>[\\w\\s\\-()]+)?";
+            String time_patern = "(?<time>\\u7B2C[\\d,]+\\u8282)+";
+            String location_time_patern = location_patern + time_patern;
+            String patern = course_patern + teacher_week_patern + location_time_patern + "(," + teacher_week_patern + location_time_patern + ")*";
+
             Regex rg = new Regex(@patern);
             for (int i = 0; i < 6; i++)
             {
@@ -138,20 +144,29 @@ namespace App1
                         {
                             Match match = matchCollection[i_in];
                             s2show = s2show + match.Groups["course"] + "\n";
-                            s2show += "----------------------------------\n";
-                            string sub_patern = tail_patern + "?";
+                            s2show += "----------------------\n";
+                            string sub_patern = teacher_week_patern + location_time_patern + "(," + teacher_week_patern + location_time_patern + ")*" + "?";
                             Regex sub_rg = new Regex(@sub_patern);
                             MatchCollection sub_matchCollection = sub_rg.Matches(match.Value);
                             for (int j_in = 0; j_in < sub_matchCollection.Count; j_in++)
                             {
                                 Match sub_match = sub_matchCollection[j_in];
-                                string teacher = sub_match.Groups["teacher"].Value;
-                                if (teacher[0] == ',')
+                                String t_w_patern = teacher_patern + week_patern;
+                                Regex teacher_week_rg = new Regex(@t_w_patern);
+                                MatchCollection teacher_week_matchCollection = teacher_week_rg.Matches(sub_match.Value);
+                                for (int k = 0; k < teacher_week_matchCollection.Count; k++)
                                 {
-                                    teacher = teacher.Substring(1);
+                                    Match sub_t_w_match = teacher_week_matchCollection[k];
+                                    String teacher = sub_t_w_match.Groups["teacher"].Value;
+                                    String week = sub_t_w_match.Groups["week"].Value;
+                                    if (teacher[0] == ',')
+                                    {
+                                        teacher = teacher.Substring(1);
+                                    }
+                                    s2show = s2show + week + ":";
+                                    s2show = s2show + teacher + "\n";
+
                                 }
-                                s2show = s2show + "teacher:" + teacher + "\n";
-                                s2show = s2show + "week:" + sub_match.Groups["week"] + "\n";
                                 s2show = s2show + "time:" + sub_match.Groups["time"] + "\n";
                                 s2show = s2show + "location:" + sub_match.Groups["location"] + "\n";
                                 if (j_in < sub_matchCollection.Count - 1)
@@ -161,7 +176,7 @@ namespace App1
                             }
                             if (i_in < matchCollection.Count - 1)
                             {
-                                s2show += "----------------------------------\n";
+                                s2show += "----------------------\n";
                             }
                         }
                         res[i, j] = s2show;
