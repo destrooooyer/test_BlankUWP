@@ -9,7 +9,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="assets/bg.jpg"/>
+            <!-- <ImageBrush ImageSource="assets/bg.jpg"/> -->
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -36,7 +36,7 @@
         <ScrollViewer
             Grid.Row="2"
             Grid.ColumnSpan="2"
-            Padding="20,0,20,20">
+            Padding="100,0,100,20">
 
             <Grid
                 

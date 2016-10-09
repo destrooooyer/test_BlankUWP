@@ -106,18 +106,20 @@ namespace App1
                             int week = global.getWeekOfToday();
                             for (int k = 0; k < global.Subjects[i, j].Name.Count; k++)
                             {
-                                if(global.Subjects[i, j].WeekBegin[k]<=week&& global.Subjects[i, j].WeekEnd[k]>=week)
+                                if (global.Subjects[i, j].WeekBegin[k] <= week && global.Subjects[i, j].WeekEnd[k] >= week)
                                 {
-                                    if(global.Subjects[i, j].IsDanShuangZhou[k]==0||
-                                        global.Subjects[i, j].IsDanShuangZhou[k]==1&&week%2==1||
-                                        global.Subjects[i, j].IsDanShuangZhou[k]==2&&week%2==0)
+                                    if (global.Subjects[i, j].IsDanShuangZhou[k] == 0 ||
+                                        global.Subjects[i, j].IsDanShuangZhou[k] == 1 && week % 2 == 1 ||
+                                        global.Subjects[i, j].IsDanShuangZhou[k] == 2 && week % 2 == 0)
                                     {
-                                        block.Text += global.Subjects[i, j].Name[k];
-                                        block.Text += global.Subjects[i, j].Location[k];
-                                        block.Text += global.Subjects[i, j].Teacher[k];
-                                        block.Text += global.Subjects[i, j].WeekBegin[k];
-                                        block.Text += global.Subjects[i, j].WeekEnd[k];
-                                        block.Text += global.Subjects[i, j].IsDanShuangZhou[k];
+                                        block.Text += "【" + global.Subjects[i, j].Name[k] + "】\n";
+                                        block.Text += " 地点：" + global.Subjects[i, j].Location[k] + "\n";
+                                        block.Text += " 教师：" + global.Subjects[i, j].Teacher[k] + "\n";
+                                        block.Text += " 上课时间：" + global.Subjects[i, j].WeekBegin[k];
+                                        block.Text += "~" + global.Subjects[i, j].WeekEnd[k];
+
+                                        block.Text += global.Subjects[i, j].IsDanShuangZhou[k] == 1 ? "单" : global.Subjects[i, j].IsDanShuangZhou[k] == 2 ? "双" : "";
+                                        block.Text += "周";
                                     }
                                 }
                             }

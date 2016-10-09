@@ -10,7 +10,7 @@
     <Grid
         Name="gd">
         <Grid.Background>
-            <ImageBrush ImageSource="assets/bg.jpg"/>
+           <!--  <ImageBrush ImageSource="assets/bg.jpg"/> -->
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
