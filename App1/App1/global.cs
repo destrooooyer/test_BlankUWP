@@ -167,7 +167,51 @@ namespace App1
                                         teacher = teacher.Substring(1);
                                     }
                                     s2show += i +" "+ j + name + week + teacher + time + location + "\n";
-                                    //i,j,name,week,teacher,time,location
+                                    week = week.Replace("周", "");
+                                    List<int> week_int=new List<int>();
+                                    foreach(string str in week.Split(','))
+                                    {
+                                        if (str.IndexOf("-")>0)
+                                        {
+                                            string[] str2 = str.Split('-');
+                                            if (str.IndexOf("单") > 0)
+                                            {
+                                                int start = int.Parse(str2[0]);
+                                                start = start % 2 == 1 ? start : start + 1;
+                                                int end = int.Parse(str2[1].Replace("单", ""));
+                                                end = end % 2 == 1 ? end : end - 1;
+                                                for (int temp = start; temp <= end; temp += 2)
+                                                {
+                                                    week_int.Add(temp);
+                                                }
+                                            }
+                                            else if (str.IndexOf("双") > 0)
+                                            {
+                                                int start = int.Parse(str2[0]);
+                                                start = start % 2 == 0 ? start : start + 1;
+                                                int end = int.Parse(str2[1].Replace("双", ""));
+                                                end = end % 2 == 0 ? end : end - 1;
+                                                for (int temp = start; temp <= end; temp += 2)
+                                                {
+                                                    week_int.Add(temp);
+                                                }
+                                            }
+                                            else
+                                            {
+                                                int start = int.Parse(str2[0]);
+                                                int end = int.Parse(str2[1]);
+                                                for (int temp = start; temp <= end; temp ++)
+                                                {
+                                                    week_int.Add(temp);
+                                                }
+                                            }
+                                        }
+                                        else
+                                        {
+                                            week_int.Add(int.Parse(str));
+                                        }
+                                    }
+
                                 }
                             }
                         }
