@@ -46,7 +46,7 @@ namespace App1
                 StorageFile a = await folder.TryGetItemAsync("saved.xls") as StorageFile;
                 if (a == null) a = await folder.CreateFileAsync("saved.xls");
                 await file.CopyAndReplaceAsync(a);
-                int r=await readXls();
+                int r = await readXls();
                 return r;
             }
             return -3;
@@ -107,21 +107,21 @@ namespace App1
             }
             catch (EndOfStreamException e)
             {
-                
+
             }
             catch (Exception e)
             {
                 return -2;
             }
 
-            String course_patern = "</br>(?<course>[\\s\\S]+?)</br>";
-            String teacher_patern = "(?<teacher>[\\u4E00-\\uFA29\\s,]*)";
-            String week_patern = "\\[(?<week>[,\\-\\s\\d\\u5468]+)\\]";
-            String teacher_week_patern = teacher_patern + week_patern + "(," + teacher_patern + week_patern + ")*";
-            String location_patern = "(</br>)?(?<location>[\\w\\s\\-()]+)?";
-            String time_patern = "(?<time>\\u7B2C[\\d,]+\\u8282)+";
-            String location_time_patern = location_patern + time_patern;
-            String patern = course_patern + teacher_week_patern + location_time_patern + "(," + teacher_week_patern + location_time_patern + ")*";
+            string course_patern = "</br>(?<course>[\\s\\S]+?)</br>";
+            string teacher_patern = "(?<teacher>[\\u4E00-\\uFA29\\s,]*)";
+            string week_patern = "\\[(?<week>[,\\-\\s\\d\\u5468\\u5355\\u53cc]+)\\]";
+            string teacher_week_patern = teacher_patern + week_patern + "(," + teacher_patern + week_patern + ")*";
+            string location_patern = "(</br>)?(?<location>[\\w\\s\\-()]+)?";
+            string time_patern = "(?<time>\\u7B2C[\\d,]+\\u8282)+";
+            string location_time_patern = location_patern + time_patern;
+            string patern = course_patern + teacher_week_patern + location_time_patern + "(," + teacher_week_patern + location_time_patern + ")*";
 
             Regex rg = new Regex(@patern);
             for (int i = 0; i < 6; i++)
@@ -143,40 +143,32 @@ namespace App1
                         for (int i_in = 0; i_in < matchCollection.Count; i_in++)
                         {
                             Match match = matchCollection[i_in];
-                            s2show = s2show + match.Groups["course"] + "\n";
-                            s2show += "----------------------\n";
+                            string name = match.Groups["course"].ToString();
                             string sub_patern = teacher_week_patern + location_time_patern + "(," + teacher_week_patern + location_time_patern + ")*" + "?";
                             Regex sub_rg = new Regex(@sub_patern);
                             MatchCollection sub_matchCollection = sub_rg.Matches(match.Value);
                             for (int j_in = 0; j_in < sub_matchCollection.Count; j_in++)
                             {
                                 Match sub_match = sub_matchCollection[j_in];
-                                String t_w_patern = teacher_patern + week_patern;
+                                string time = sub_match.Groups["time"].ToString();
+                                string location = sub_match.Groups["location"].ToString();
+
+                                string t_w_patern = teacher_patern + week_patern;
                                 Regex teacher_week_rg = new Regex(@t_w_patern);
                                 MatchCollection teacher_week_matchCollection = teacher_week_rg.Matches(sub_match.Value);
+
                                 for (int k = 0; k < teacher_week_matchCollection.Count; k++)
                                 {
                                     Match sub_t_w_match = teacher_week_matchCollection[k];
-                                    String teacher = sub_t_w_match.Groups["teacher"].Value;
-                                    String week = sub_t_w_match.Groups["week"].Value;
+                                    string teacher = sub_t_w_match.Groups["teacher"].Value;
+                                    string week = sub_t_w_match.Groups["week"].Value;
                                     if (teacher[0] == ',')
                                     {
                                         teacher = teacher.Substring(1);
                                     }
-                                    s2show = s2show + week + ":";
-                                    s2show = s2show + teacher + "\n";
-
+                                    s2show += i +" "+ j + name + week + teacher + time + location + "\n";
+                                    //i,j,name,week,teacher,time,location
                                 }
-                                s2show = s2show + "time:" + sub_match.Groups["time"] + "\n";
-                                s2show = s2show + "location:" + sub_match.Groups["location"] + "\n";
-                                if (j_in < sub_matchCollection.Count - 1)
-                                {
-                                    s2show = s2show + "------------\n";
-                                }
-                            }
-                            if (i_in < matchCollection.Count - 1)
-                            {
-                                s2show += "----------------------\n";
                             }
                         }
                         res[i, j] = s2show;
@@ -190,7 +182,7 @@ namespace App1
         public static string getSetting(string name)
         {
             XmlNode root = doc.ChildNodes[0];
-            foreach(XmlNode n in root.ChildNodes)
+            foreach (XmlNode n in root.ChildNodes)
             {
                 if (n.Name == name)
                 {
@@ -200,7 +192,7 @@ namespace App1
             return "";
         }
 
-        public static void setSetting(string name,string value)
+        public static void setSetting(string name, string value)
         {
             XmlNode root = doc.ChildNodes[0];
             foreach (XmlNode n in root.ChildNodes)
@@ -236,7 +228,7 @@ namespace App1
             if (setting_file != null)
             {
                 doc = new XmlDocument();
-                using(Stream f= await setting_file.OpenStreamForReadAsync())
+                using (Stream f = await setting_file.OpenStreamForReadAsync())
                     doc.Load(f);
                 //temp_message.Text = doc.ChildNodes[0].ChildNodes[0].InnerText;
             }
@@ -247,7 +239,7 @@ namespace App1
                 doc.CreateXmlDeclaration("1.0", "utf-8", "yes");
                 XmlNode rootNode = doc.CreateElement("Settings");
                 doc.AppendChild(rootNode);
-                using(Stream f= await setting_file.OpenStreamForWriteAsync())
+                using (Stream f = await setting_file.OpenStreamForWriteAsync())
                     doc.Save(f);
             }
             return 0;
@@ -261,7 +253,8 @@ namespace App1
             {
                 file = saved;
                 return await readXls();
-            }else
+            }
+            else
             {
                 return -3;
             }
