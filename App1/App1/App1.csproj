@@ -110,6 +110,9 @@
       <DependentUpon>settings.xaml</DependentUpon>
     </Compile>
     <Compile Include="subjectDisplay.cs" />
+    <Compile Include="ToastPrompt.xaml.cs">
+      <DependentUpon>ToastPrompt.xaml</DependentUpon>
+    </Compile>
     <Compile Include="today.xaml.cs">
       <DependentUpon>today.xaml</DependentUpon>
     </Compile>
@@ -147,6 +150,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ToastPrompt.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -9,9 +9,9 @@
 
     <Grid
         Name="gd">
-        <Grid.Background>
-           <!--  <ImageBrush ImageSource="assets/bg.jpg"/> -->
-        </Grid.Background>
+        <!--  Grid.Background>
+           <<ImageBrush ImageSource="assets/bg.jpg"/>>
+        </ -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -82,5 +82,15 @@
                     Grid.ColumnSpan="2"
                     Grid.RowSpan="2" d:IsHidden="True"></local:pane>
 
+        <local:ToastPrompt 
+                x:Name="Toast" 
+                Width="300"
+                Height="150"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Label =""
+            Grid.Column="2"
+            Grid.Row="2"
+            />
     </Grid>
 </Page>

@@ -8,9 +8,9 @@
     mc:Ignorable="d">
 
     <Grid>
-        <Grid.Background>
-            <!-- <ImageBrush ImageSource="assets/bg.jpg"/> -->
-        </Grid.Background>
+        <!-- Grid.Background>
+            <<ImageBrush ImageSource="assets/bg.jpg"/>>
+        </ -->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -62,5 +62,15 @@
         <local:pane x:Name="pane" 
                     Grid.ColumnSpan="2"
                     Grid.RowSpan="3"></local:pane>
+        <local:ToastPrompt 
+                x:Name="Toast" 
+                Width="300"
+                Height="150"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Label =""
+            Grid.Column="2"
+            Grid.Row="2"
+            />
     </Grid>
 </Page>

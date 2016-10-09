@@ -150,17 +150,19 @@ namespace App1
             }
             else
             {
-                temp_message.Text = "没有打开文件，滚去设置";
+                Toast.Label = "没有选择课表，请前往设置页";
+                Toast.Show();
             }
             //temp_message.Text = global.getSetting("first_monday");
             //temp_message.Text = ApplicationData.Current.LocalFolder.Path;
             try
             {
-                temp_message.Text += "\n今天是开学第" + global.getWeekOfToday() + "周";
+                temp_message.Text = "\n今天是开学第" + global.getWeekOfToday() + "周";
             }
             catch (System.Exception ex)
             {
-                temp_message.Text += "\n还没设置学期第一周周一的日期，滚去设置";
+                Toast.Label = "没有设置学期第一周周一的日期，请前往设置页";
+                Toast.Show();
             }
         }
 

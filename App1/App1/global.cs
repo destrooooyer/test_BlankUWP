@@ -189,6 +189,7 @@ namespace App1
 
                                     week = week.Replace("周", "");
                                     List<int> week_int = new List<int>();
+                                    
                                     foreach (string str in week.Split(','))
                                     {
                                         if (str.IndexOf("-") > 0)
