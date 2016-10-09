@@ -9,9 +9,34 @@
 
     <Grid
         Name="gd">
-        <!--  Grid.Background>
-           <<ImageBrush ImageSource="assets/bg.jpg"/>>
-        </ -->
+        <!--<Grid.Background>
+            <ImageBrush ImageSource="assets/bg.jpg"/>
+        </Grid.Background>-->
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup x:Name="VisualStateGroup">
+                <VisualState x:Name="Narrow">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="sp.ColumnDefinitions[0].Width" Value="*"/>
+                        <Setter Target="sp.ColumnDefinitions[1].Width" Value="10*"/>
+                        <Setter Target="sp.ColumnDefinitions[2].Width" Value="*"/>
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="Wide">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="800"/>
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="sp.ColumnDefinitions[0].Width" Value="1*"/>
+                        <Setter Target="sp.ColumnDefinitions[1].Width" Value="1*"/>
+                        <Setter Target="sp.ColumnDefinitions[2].Width" Value="1*"/>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -27,27 +52,35 @@
                    VerticalAlignment="Center"
                    Grid.Column="1"/>
 
-
-        <ListView
-            Name="sp"
+        <Grid Name="sp"
             Width="{Binding Path=ActualWidth,ElementName=gd}"
             Grid.Row="1" Grid.ColumnSpan="2"
-            Padding="10,10,10,10">
-            <ListView.Background>
-
+            Padding="10,40,10,10">
+            <Grid.Background>
                 <ImageBrush ImageSource="assets/glass.png"/>
-
-            </ListView.Background>
-            <Border BorderBrush="WhiteSmoke" BorderThickness="1"
-                    Margin="10,5,10,5">
-                <Button Height="100" Width="{Binding Path=ActualWidth,ElementName=sp}"
-                    Click="Button_Click"
-                    Name="chooseXls">
+            </Grid.Background>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="1*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Border BorderBrush="WhiteSmoke" 
+                    BorderThickness="1"
+                    Grid.Column="1">
+                <Button Height="50"
+                        Click="Button_Click"
+                        Name="chooseXls" HorizontalAlignment="Stretch">
                     未选择课表，请选择课表
                 </Button>
             </Border>
-
-            <Grid Margin="10,5,10,5">
+            <Grid
+                  Grid.Column="1"
+                  Grid.Row="1"
+                  HorizontalAlignment="Stretch">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -57,7 +90,10 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock VerticalAlignment="Center">
+                <TextBlock VerticalAlignment="Center"
+                           Grid.ColumnSpan="2"
+                           Margin="0,30,0,10"
+                           >
                     请选择开学第一周周一的日期
                 </TextBlock>
 
@@ -66,17 +102,16 @@
                                     Margin="10,5,10,5"/>
 
                 <Border BorderBrush="WhiteSmoke" BorderThickness="1"
-                        Grid.Column="1" Grid.RowSpan="2"
-                    
+                        Grid.Column="1"
+                        Grid.Row="1"
                         Margin="10,5,10,5">
-                    <Button Height="100" Width="150" Click="Button_Click_2">
+                    <Button Height="50" Width="150" Click="Button_Click_2">
                         提交
                     </Button>
                 </Border>
 
             </Grid>
-        </ListView>
-
+        </Grid>
 
         <local:pane x:Name="pane" 
                     Grid.ColumnSpan="2"
