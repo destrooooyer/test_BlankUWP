@@ -163,6 +163,10 @@ namespace App1
                         {
                             Match match = matchCollection[i_in];
                             string name = match.Groups["course"].ToString();
+                            if (name.IndexOf('\u0010') >= 0)
+                            {
+                                name = name.Substring(2);
+                            }
                             string sub_patern = teacher_week_patern + location_time_patern + "(," + teacher_week_patern + location_time_patern + ")*" + "?";
                             Regex sub_rg = new Regex(@sub_patern);
                             MatchCollection sub_matchCollection = sub_rg.Matches(match.Value);

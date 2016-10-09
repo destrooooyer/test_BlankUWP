@@ -78,6 +78,7 @@ namespace App1
                                     block.Text += global.Subjects[i, j].IsDanShuangZhou[k] == 1 ? "单" : global.Subjects[i, j].IsDanShuangZhou[k] == 2 ? "双" : "";
                                     block.Text += "周";
                                     block.Text += "\n 教师：" + global.Subjects[i, j].Teacher[k];
+                                    block.Name = global.Subjects[i, j].Name[k];
                                 }
                             }
                         }
@@ -89,6 +90,13 @@ namespace App1
                     block.Padding = new Thickness(10);
                     block.TextWrapping = TextWrapping.Wrap;
                     block.MinHeight = 80;
+
+                    block.Tapped += new TappedEventHandler((object sender, TappedRoutedEventArgs e) =>
+                    {
+                        TextBlock tb = (TextBlock)sender;
+                        Frame rootFrame = Window.Current.Content as Frame;
+                        rootFrame.Navigate(typeof(note), tb.Name);
+                    });
 
                     grid1.Children.Add(block);
                     Grid.SetRow(block, i);

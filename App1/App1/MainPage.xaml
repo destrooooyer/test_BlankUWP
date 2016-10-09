@@ -71,7 +71,7 @@
         </Grid>
         <local:pane x:Name="pane" 
                     Grid.ColumnSpan="2"
-                    Grid.RowSpan="2"></local:pane>
+                    Grid.RowSpan="2" d:IsHidden="True"></local:pane>
         <local:ToastPrompt 
                 x:Name="Toast" 
                 Width="300"
