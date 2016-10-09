@@ -78,7 +78,11 @@ namespace App1
                 // configuring the new page by passing required information as a navigation
                 // parameter
                 Rect size = Windows.UI.Xaml.Window.Current.Bounds;
-                if (size.Width < 450)
+                if (global.getSetting("first_monday")==""||global.File==null)
+                {
+                    rootFrame.Navigate(typeof(settings), e.Arguments);
+                }
+                else if (size.Width < 450)
                 {
                     rootFrame.Navigate(typeof(today), e.Arguments);
                 }
