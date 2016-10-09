@@ -9,7 +9,7 @@
 
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="assets/bg_1_1.jpg"/>
+            <ImageBrush ImageSource="assets/bg.jpg"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
@@ -27,7 +27,7 @@
                    Grid.Column="1"/>
 
         <Grid Name="grid_week" Grid.Row="1" Grid.ColumnSpan="2">
-            
+
             <Grid.Resources>
                 <Style TargetType="Border">
                     <Setter
@@ -45,9 +45,11 @@
             </Grid.RowDefinitions>
             <TextBlock Name="temp_message" TextWrapping="Wrap" Text="没有打开文件，滚去设置" SelectionChanged="temp_message_SelectionChanged" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"
-                       Grid.Row="0" Grid.Column="0"/>
-            
-            <ScrollViewer x:Name="scroll" Grid.Row="1" Grid.Column="0">
+                       Grid.Row="0"/>
+
+            <ScrollViewer x:Name="scroll" Grid.Row="1" Grid.Column="0" Padding="20,0,20,0"
+                          HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled"
+                          HorizontalScrollBarVisibility="Auto">
                 <Grid Name="grid1">
                     <Grid.Background>
                         <ImageBrush ImageSource="assets/glass.png"/>
@@ -62,8 +64,8 @@
                     </Grid.Resources>
                 </Grid>
             </ScrollViewer>
-            
-            
+
+
 
 
         </Grid>

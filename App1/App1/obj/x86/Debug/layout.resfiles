@@ -1,5 +1,8 @@
 WinMetadata\Windows.winmd
 ApplicationInsights.config
+Assets\bg.jpg
+Assets\bg_1_1.jpg
+Assets\glass.png
 Assets\LockScreenLogo.scale-200.png
 Assets\SplashScreen.scale-200.png
 Assets\Square150x150Logo.scale-200.png

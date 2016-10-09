@@ -37,10 +37,10 @@ namespace App1
         {
             base.OnNavigatedTo(e);
             initGrid();
-            if (global.File == null)
-                temp_message.Text = "没有打开文件，滚去设置";
-            else
-                temp_message.Text = "已打开 " + global.File.Name;
+            //             if (global.File == null)
+            //                 temp_message.Text = "没有打开文件，滚去设置";
+            //             else
+            //                 temp_message.Text = "已打开 " + global.File.Name;
         }
 
         private void initGrid()
@@ -55,11 +55,11 @@ namespace App1
                 InitRows(6, grid1);
                 for (int i = 0; i < 6; i++)
                 {
-                    int j = Convert.ToInt32(DateTime.Now.DayOfWeek)-1;
+                    int j = Convert.ToInt32(DateTime.Now.DayOfWeek) - 1;
                     if (j < 0) j = 6;
                     TextBlock block = new TextBlock();
 
-                    block.Text = global.res[i,j];
+                    block.Text = global.res[i, j];
                     block.Padding = new Thickness(10);
                     block.TextWrapping = TextWrapping.Wrap;
                     block.MinHeight = 100;
@@ -77,6 +77,15 @@ namespace App1
             else
             {
                 temp_message.Text = "没有打开文件，滚去设置";
+            }
+
+            try
+            {
+                temp_message.Text += "\n今天是开学第" + global.getWeekOfToday() + "周";
+            }
+            catch (System.Exception ex)
+            {
+                temp_message.Text += "\n还没设置学期第一周周一的日期，滚去设置";
             }
         }
 

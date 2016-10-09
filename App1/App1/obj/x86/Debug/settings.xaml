@@ -7,7 +7,11 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid>
+    <Grid x:ConnectionId='1'
+        Name="gd">
+        <Grid.Background>
+            <ImageBrush ImageSource="assets/bg.jpg"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -17,35 +21,66 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button x:ConnectionId='1'                        Style="{StaticResource SplitViewTogglePaneButtonStyle}"></Button>
+        <Button x:ConnectionId='2'                        Style="{StaticResource SplitViewTogglePaneButtonStyle}"></Button>
         <TextBlock Text="设置"
                    Style="{ThemeResource TitleTextBlockStyle}" 
                    VerticalAlignment="Center"
                    Grid.Column="1"/>
 
 
-        <ListView x:ConnectionId='2'
+        <ListView x:ConnectionId='3'
             Name="sp"
-            Grid.Row="1" Grid.ColumnSpan="2">
-            <Border BorderBrush="WhiteSmoke" BorderThickness="1">
-                <Button x:ConnectionId='4' Height="100" Width="{Binding Path=ActualWidth,ElementName=sp}"
+            Width="{Binding Path=ActualWidth,ElementName=gd}"
+            Grid.Row="1" Grid.ColumnSpan="2"
+            Padding="10,10,10,10">
+            <ListView.Background>
+
+                <ImageBrush ImageSource="assets/glass.png"/>
+
+            </ListView.Background>
+            <Border BorderBrush="WhiteSmoke" BorderThickness="1"
+                    Margin="10,5,10,5">
+                <Button x:ConnectionId='7' Height="100" Width="{Binding Path=ActualWidth,ElementName=sp}"
                                         
                     Name="chooseXls">
                     未选择课表，请选择课表
                 </Button>
             </Border>
 
-            <Border BorderBrush="WhiteSmoke" BorderThickness="1">
-                <Button Height="100" Width="{Binding Path=ActualWidth,ElementName=sp}">
-                        膜法师的修养
-                </Button>
-            </Border>
+            <Grid Margin="10,5,10,5">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="Auto"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock VerticalAlignment="Center">
+                    请选择开学第一周周一的日期
+                </TextBlock>
+
+                <CalendarDatePicker x:ConnectionId='5' x:Name="date"
+                                    Grid.Row="1"
+                                    Margin="10,5,10,5"/>
+
+                <Border BorderBrush="WhiteSmoke" BorderThickness="1"
+                        Grid.Column="1" Grid.RowSpan="2"
+                    
+                        Margin="10,5,10,5">
+                    <Button x:ConnectionId='6' Height="100" Width="150"                       >
+                        提交
+                    </Button>
+                </Border>
+
+            </Grid>
         </ListView>
 
 
-        <local:pane x:ConnectionId='3' x:Name="pane" 
+        <local:pane x:ConnectionId='4' x:Name="pane" 
                     Grid.ColumnSpan="2"
-                    Grid.RowSpan="2"></local:pane>
+                    Grid.RowSpan="2" d:IsHidden="True"></local:pane>
 
     </Grid>
 </Page>

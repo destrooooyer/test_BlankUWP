@@ -56,7 +56,7 @@
       <RootProperty Name="RowDefinitions" />
       <RootProperty Name="Name" />
       <RootProperty Name="Resources" />
-      <RootProperty Name="Padding" />
+      <RootProperty Name="Margin" />
       <RootMethod Name="GetColumn" />
       <RootMethod Name="SetColumn" />
       <RootMethod Name="GetRow" />
@@ -118,6 +118,9 @@
     <RootType FullName="Windows.UI.Xaml.Controls.Page">
       <RootProperty Name="Content" />
     </RootType>
+    <RootType FullName="Windows.UI.Xaml.Media.ImageBrush">
+      <RootProperty Name="ImageSource" />
+    </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.RowDefinition">
       <RootProperty Name="Height" />
     </RootType>
@@ -128,16 +131,21 @@
       <RootProperty Name="Name" />
       <RootProperty Name="TextWrapping" />
       <RootProperty Name="HorizontalAlignment" />
+      <RootProperty Name="Inlines" />
       <RootEvent Name="SelectionChanged" />
     </RootType>
     <RootType FullName="App1.pane" />
     <RootType FullName="Windows.UI.Xaml.Controls.Border">
       <RootProperty Name="BorderBrush" />
       <RootProperty Name="BorderThickness" />
+      <RootProperty Name="Margin" />
       <RootProperty Name="Child" />
     </RootType>
     <RootType FullName="Windows.UI.Xaml.Controls.ScrollViewer">
       <RootProperty Name="Padding" />
+      <RootProperty Name="HorizontalScrollMode" />
+      <RootProperty Name="VerticalScrollMode" />
+      <RootProperty Name="HorizontalScrollBarVisibility" />
       <RootProperty Name="Content" />
     </RootType>
     <RootType FullName="App1.MainPage" />
@@ -151,12 +159,18 @@
     <RootType FullName="Windows.UI.Xaml.Controls.ListView">
       <RootProperty Name="Name" />
       <RootProperty Name="Items" />
+      <RootProperty Name="Width" />
+      <RootProperty Name="Padding" />
+      <RootProperty Name="Background" />
       <RootEvent Name="SelectionChanged" />
     </RootType>
     <RootType FullName="System.String" />
     <RootType FullName="Windows.UI.Xaml.Data.Binding">
       <RootProperty Name="Path" />
       <RootProperty Name="ElementName" />
+    </RootType>
+    <RootType FullName="Windows.UI.Xaml.Controls.CalendarDatePicker">
+      <RootProperty Name="Margin" />
     </RootType>
     <RootType FullName="App1.settings" />
     <RootType FullName="App1.today" />

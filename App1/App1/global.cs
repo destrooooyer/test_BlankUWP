@@ -166,12 +166,12 @@ namespace App1
                                     {
                                         teacher = teacher.Substring(1);
                                     }
-                                    s2show += i +" "+ j + name + week + teacher + time + location + "\n";
+                                    s2show += i + " " + j + name + week + teacher + time + location + "\n";
                                     week = week.Replace("周", "");
-                                    List<int> week_int=new List<int>();
-                                    foreach(string str in week.Split(','))
+                                    List<int> week_int = new List<int>();
+                                    foreach (string str in week.Split(','))
                                     {
-                                        if (str.IndexOf("-")>0)
+                                        if (str.IndexOf("-") > 0)
                                         {
                                             string[] str2 = str.Split('-');
                                             if (str.IndexOf("单") > 0)
@@ -200,7 +200,7 @@ namespace App1
                                             {
                                                 int start = int.Parse(str2[0]);
                                                 int end = int.Parse(str2[1]);
-                                                for (int temp = start; temp <= end; temp ++)
+                                                for (int temp = start; temp <= end; temp++)
                                                 {
                                                     week_int.Add(temp);
                                                 }
@@ -303,5 +303,20 @@ namespace App1
                 return -3;
             }
         }
+
+        public static int getWeekOfToday()
+        {
+            try
+            {
+                long temp = Convert.ToInt64(global.getSetting("firstMondayFileTime"));
+                DateTime date = DateTime.FromFileTime(temp);
+                return ((DateTime.Now - date).Days / 7 + 1);
+            }
+            catch (System.Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }

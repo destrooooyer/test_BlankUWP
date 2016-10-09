@@ -31,9 +31,9 @@ namespace App1
             pane.pane_lv.SelectedIndex = 1;
             initGrid();
 
-            if (Window.Current.Bounds.Width>650)
+            if (Window.Current.Bounds.Width > 650)
             {
-                scroll.Padding = new Thickness(70,20,70,50);
+                scroll.Padding = new Thickness(70, 20, 70, 50);
             }
         }
 
@@ -58,7 +58,7 @@ namespace App1
         private void initGrid()
         {
 
-            if (global.File!=null)
+            if (global.File != null)
             {
                 temp_message.Text = "已打开 " + global.File.Name;
 
@@ -72,13 +72,13 @@ namespace App1
                     {
                         if (global.res[jndex, index].Length > 0)
                         {
-                            days = index+1;
+                            days = index + 1;
                         }
                     }
                 }
                 InitRows(7, grid1);
                 InitColumns(days, grid1);
-                String[] days_in_week = new String[] {"Mon","Tue","Wed","Thur","Fri","Sat","Sun"};
+                String[] days_in_week = new String[] { "Mon", "Tue", "Wed", "Thur", "Fri", "Sat", "Sun" };
                 for (int j = 0; j < days; j++)
                 {
                     TextBlock block = new TextBlock();
@@ -105,13 +105,13 @@ namespace App1
                         block.TextWrapping = TextWrapping.Wrap;
 
                         grid1.Children.Add(block);
-                        Grid.SetRow(block, i+1);
+                        Grid.SetRow(block, i + 1);
                         Grid.SetColumn(block, j);
                         //temp_message.Text = ""+ str_id[i,j] + " "+ System.Text.Encoding.Unicode.GetString(strs[str_id[i, j]]);
 
                         Border bd = new Border();
                         grid1.Children.Add(bd);
-                        Grid.SetRow(bd, i+1);
+                        Grid.SetRow(bd, i + 1);
                         Grid.SetColumn(bd, j);
 
                     }
@@ -121,7 +121,16 @@ namespace App1
             {
                 temp_message.Text = "没有打开文件，滚去设置";
             }
-            temp_message.Text = global.getSetting("first_monday");
+            //temp_message.Text = global.getSetting("first_monday");
+            //temp_message.Text = ApplicationData.Current.LocalFolder.Path;
+            try
+            {
+                temp_message.Text += "\n今天是开学第" + global.getWeekOfToday() + "周";
+            }
+            catch (System.Exception ex)
+            {
+                temp_message.Text += "\n还没设置学期第一周周一的日期，滚去设置";
+            }
         }
 
         private void InitRows(int rowCount, Grid g)
