@@ -9,9 +9,9 @@
 
     <Grid
         Name="gd">
-        <!--<Grid.Background>
+        <Grid.Background>
             <ImageBrush ImageSource="assets/bg.jpg"/>
-        </Grid.Background>-->
+        </Grid.Background>
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"></ColumnDefinition>
