@@ -187,21 +187,6 @@ namespace App1
                                     }
                                     s2show += i + " " + j + name + week + teacher + time + location + "\n";
 
-                                    Regex pWeek = new Regex("(\\d*)-(\\d*)");
-                                    var mc = pWeek.Match(week);
-                                    int weekBegin = Convert.ToInt32(mc.Groups[1].Value);
-                                    int weekEnd = Convert.ToInt32(mc.Groups[2].Value);
-//                                     int weekBegin = 1;
-//                                     int weekEnd=1;
-                                    pWeek = new Regex(@"单");
-                                    int isDanShuangZhou = 0;
-                                    if (pWeek.IsMatch(week)) isDanShuangZhou = 1;
-                                    pWeek = new Regex(@"双");
-                                    if (pWeek.IsMatch(week)) isDanShuangZhou = 2;
-                                    Subjects[i, j].pushBack(name, teacher, location,weekBegin,weekEnd,isDanShuangZhou);
-
-
-
                                     week = week.Replace("周", "");
                                     List<int> week_int = new List<int>();
                                     foreach (string str in week.Split(','))
@@ -215,10 +200,7 @@ namespace App1
                                                 start = start % 2 == 1 ? start : start + 1;
                                                 int end = int.Parse(str2[1].Replace("单", ""));
                                                 end = end % 2 == 1 ? end : end - 1;
-                                                for (int temp = start; temp <= end; temp += 2)
-                                                {
-                                                    week_int.Add(temp);
-                                                }
+                                                Subjects[i, j].pushBack(name, teacher, location, start, end, 1);
                                             }
                                             else if (str.IndexOf("双") > 0)
                                             {
@@ -226,24 +208,19 @@ namespace App1
                                                 start = start % 2 == 0 ? start : start + 1;
                                                 int end = int.Parse(str2[1].Replace("双", ""));
                                                 end = end % 2 == 0 ? end : end - 1;
-                                                for (int temp = start; temp <= end; temp += 2)
-                                                {
-                                                    week_int.Add(temp);
-                                                }
+                                                Subjects[i, j].pushBack(name, teacher, location, start, end, 2);
                                             }
                                             else
                                             {
                                                 int start = int.Parse(str2[0]);
                                                 int end = int.Parse(str2[1]);
-                                                for (int temp = start; temp <= end; temp++)
-                                                {
-                                                    week_int.Add(temp);
-                                                }
+                                                Subjects[i, j].pushBack(name, teacher, location, start, end, 0);
                                             }
                                         }
                                         else
                                         {
-                                            week_int.Add(int.Parse(str));
+                                            int start = int.Parse(str);
+                                            Subjects[i, j].pushBack(name, teacher, location, start, start, 0);
                                         }
                                     }
 

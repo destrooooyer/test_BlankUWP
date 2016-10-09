@@ -112,6 +112,7 @@ namespace App1
                                         global.Subjects[i, j].IsDanShuangZhou[k] == 1 && week % 2 == 1 ||
                                         global.Subjects[i, j].IsDanShuangZhou[k] == 2 && week % 2 == 0)
                                     {
+                                        if (k > 0) block.Text += "\n";
                                         block.Text += "【" + global.Subjects[i, j].Name[k] + "】\n";
                                         block.Text += " 地点：" + global.Subjects[i, j].Location[k] + "\n";
                                         block.Text += " 教师：" + global.Subjects[i, j].Teacher[k] + "\n";
