@@ -71,13 +71,13 @@ namespace App1
                                     global.Subjects[i, j].IsDanShuangZhou[k] == 2 && week % 2 == 0)
                                 {
                                     block.Text += "【" + global.Subjects[i, j].Name[k] + "】\n";
-                                    block.Text += " 地点：" + global.Subjects[i, j].Location[k] + "\n";
-                                    block.Text += " 教师：" + global.Subjects[i, j].Teacher[k] + "\n";
-                                    block.Text += " 上课时间：" + global.Subjects[i, j].WeekBegin[k];
-                                    block.Text += "~" + global.Subjects[i, j].WeekEnd[k];
 
+                                    block.Text += global.Subjects[i, j].Location[k]+" ";
+                                    block.Text += global.Subjects[i, j].WeekBegin[k];
+                                    block.Text += "~" + global.Subjects[i, j].WeekEnd[k];
                                     block.Text += global.Subjects[i, j].IsDanShuangZhou[k] == 1 ? "单" : global.Subjects[i, j].IsDanShuangZhou[k] == 2 ? "双" : "";
                                     block.Text += "周";
+                                    block.Text += "\n 教师：" + global.Subjects[i, j].Teacher[k];
                                 }
                             }
                         }
@@ -88,7 +88,7 @@ namespace App1
                     }
                     block.Padding = new Thickness(10);
                     block.TextWrapping = TextWrapping.Wrap;
-                    block.MinHeight = 100;
+                    block.MinHeight = 80;
 
                     grid1.Children.Add(block);
                     Grid.SetRow(block, i);
