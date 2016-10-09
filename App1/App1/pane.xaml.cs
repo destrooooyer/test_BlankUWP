@@ -22,6 +22,14 @@ namespace App1
         public pane()
         {
             this.InitializeComponent();
+            if (Window.Current.Bounds.Width>650)
+            {
+                //pane_lv.Items.RemoveAt(0);
+            }
+            else
+            {
+                
+            }
         }
 
         private void pane_lv_SelectionChanged(object sender, SelectionChangedEventArgs e)

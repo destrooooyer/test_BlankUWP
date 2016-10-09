@@ -77,12 +77,12 @@ namespace App1
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                Rect size = Windows.UI.Xaml.Window.Current.Bounds;
+               
                 if (global.getSetting("first_monday")==""||global.File==null)
                 {
                     rootFrame.Navigate(typeof(settings), e.Arguments);
                 }
-                else if (size.Width < 450)
+                else if (Window.Current.Bounds.Width < 450)
                 {
                     rootFrame.Navigate(typeof(today), e.Arguments);
                 }
