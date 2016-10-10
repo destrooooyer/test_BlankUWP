@@ -19,19 +19,13 @@
                         <AdaptiveTrigger MinWindowWidth="0"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="sp.ColumnDefinitions[0].Width" Value="*"/>
-                        <Setter Target="sp.ColumnDefinitions[1].Width" Value="10*"/>
-                        <Setter Target="sp.ColumnDefinitions[2].Width" Value="*"/>
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="Wide">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="800"/>
+                        <AdaptiveTrigger MinWindowWidth="500"/>
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="sp.ColumnDefinitions[0].Width" Value="1*"/>
-                        <Setter Target="sp.ColumnDefinitions[1].Width" Value="1*"/>
-                        <Setter Target="sp.ColumnDefinitions[2].Width" Value="1*"/>
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
@@ -51,39 +45,32 @@
                    Style="{ThemeResource TitleTextBlockStyle}" 
                    VerticalAlignment="Center"
                    Grid.Column="1"/>
-        <Grid Name="sp"
-            Width="{Binding Path=ActualWidth,ElementName=gd}"
-            Grid.Row="1" Grid.ColumnSpan="2"
-            Padding="10,0,10,10">
-            <Grid.Background>
+        <StackPanel
+            Grid.Row="1"
+            Grid.ColumnSpan="2"
+            MinWidth="320"
+                MaxWidth="600"
+            HorizontalAlignment="Center"
+            Padding="10">
+            <StackPanel.Background>
                 <ImageBrush ImageSource="assets/glass.png"/>
-            </Grid.Background>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="1*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"></RowDefinition>
-                <RowDefinition Height="Auto"></RowDefinition>
-            </Grid.RowDefinitions>
+            </StackPanel.Background>
             <TextBlock
                 Name="temp_message"
                 TextWrapping="Wrap"
-                Text="没有打开文件，滚去设置"
-                HorizontalAlignment="Center" VerticalAlignment="Center"
-                Grid.Row="0"
-                Grid.Column="1"/>
+                Text=""
+                HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
             <ScrollViewer
-                Grid.Row="1"
-                Grid.Column="1">
+                Name="scroll"
+                HorizontalAlignment="Stretch"
+                HorizontalScrollBarVisibility="Auto"
+                VerticalScrollBarVisibility="Auto"
+                >
 
                 <Grid
                 Name="grid1">
-                    <Grid.Background>
-                        <ImageBrush ImageSource="assets/glass.png"/>
-                    </Grid.Background>
+
                     <Grid.Resources>
                         <Style TargetType="Border">
                             <Setter
@@ -97,8 +84,11 @@
 
                 </Grid>
             </ScrollViewer>
+            <TextBlock Text="提示：点击课程可以记笔记"
+                       HorizontalAlignment="Center" VerticalAlignment="Center" />
 
-        </Grid>
+        </StackPanel>
+
         <local:pane x:Name="pane" 
                     Grid.ColumnSpan="2"
                     Grid.RowSpan="3"></local:pane>

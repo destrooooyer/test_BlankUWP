@@ -41,15 +41,21 @@
 
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Name="temp_message" TextWrapping="Wrap" Text="没有打开文件，滚去设置" SelectionChanged="temp_message_SelectionChanged" 
+            
+            <TextBlock Name="temp_message" TextWrapping="Wrap" Text="" SelectionChanged="temp_message_SelectionChanged" 
                        HorizontalAlignment="Center" VerticalAlignment="Center"
                        Grid.Row="0"/>
-
-            <ScrollViewer x:Name="scroll" Grid.Row="1" Grid.Column="0" Padding="20,0,20,0"
+            <TextBlock Text="提示：点击课程可以记笔记" Grid.Column="0"
+                       HorizontalAlignment="Center" VerticalAlignment="Center"
+                       Grid.Row="1" />
+            <ScrollViewer x:Name="scroll" Grid.Row="2" Grid.Column="0" HorizontalAlignment="Center"
+                          Width="auto"
                           HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled"
-                          HorizontalScrollBarVisibility="Auto">
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto">
                 <Grid Name="grid1">
                     <Grid.Background>
                         <ImageBrush ImageSource="assets/glass.png"/>
@@ -63,9 +69,10 @@
                         </Style>
                     </Grid.Resources>
                 </Grid>
+                
             </ScrollViewer>
 
-
+            
 
 
         </Grid>

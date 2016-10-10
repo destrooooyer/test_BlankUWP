@@ -90,7 +90,7 @@ namespace App1
                     block.Padding = new Thickness(10);
                     block.TextWrapping = TextWrapping.Wrap;
                     block.MinHeight = 80;
-
+                    block.TextAlignment = TextAlignment.Center;
                     block.Tapped += new TappedEventHandler((object sender, TappedRoutedEventArgs e) =>
                     {
                         TextBlock tb = (TextBlock)sender;
@@ -134,5 +134,6 @@ namespace App1
                 g.RowDefinitions.Add(rd);
             }
         }
+
     }
 }
