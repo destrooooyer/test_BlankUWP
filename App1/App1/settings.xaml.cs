@@ -78,6 +78,8 @@ namespace App1
 
             global.setSetting("firstMondayFileTime", date.Date.Value.Date.ToFileTime().ToString());
             global.saveSetting();
+            Toast.Label = "设置已保存 ";
+            Toast.Show();
         }
 
     }

@@ -55,7 +55,8 @@
                           Width="auto"
                           HorizontalScrollMode="Enabled" VerticalScrollMode="Enabled"
                           HorizontalScrollBarVisibility="Auto"
-                          VerticalScrollBarVisibility="Auto">
+                          VerticalScrollBarVisibility="Auto"
+                          Margin="0,0,0,20">
                 <Grid Name="grid1">
                     <Grid.Background>
                         <ImageBrush ImageSource="assets/glass.png"/>

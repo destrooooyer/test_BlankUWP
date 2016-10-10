@@ -30,11 +30,6 @@ namespace App1
             this.InitializeComponent();
             pane.pane_lv.SelectedIndex = 1;
             initGrid();
-
-            if (Window.Current.Bounds.Width > 650)
-            {
-                scroll.Padding = new Thickness(70, 20, 70, 50);
-            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
